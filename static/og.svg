@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- desk background -->
+  <rect width="1200" height="630" fill="#e8e0cf"/>
+  <!-- paper sheet -->
+  <rect x="180" y="60" width="840" height="510" rx="3" fill="#fdfbf5" stroke="#d0c8b0" stroke-width="1"/>
+  <!-- soft shadow -->
+  <rect x="184" y="64" width="840" height="510" rx="3" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="8"/>
+  <!-- red margin -->
+  <line x1="280" y1="60" x2="280" y2="570" stroke="#e8a5a5" stroke-width="2"/>
+  <!-- ruled lines -->
+  <g stroke="#d5dbe3" stroke-width="1">
+    <line x1="300" y1="120" x2="980" y2="120"/>
+    <line x1="300" y1="152" x2="980" y2="152"/>
+    <line x1="300" y1="184" x2="980" y2="184"/>
+    <line x1="300" y1="216" x2="980" y2="216"/>
+    <line x1="300" y1="248" x2="980" y2="248"/>
+    <line x1="300" y1="280" x2="980" y2="280"/>
+    <line x1="300" y1="312" x2="980" y2="312"/>
+    <line x1="300" y1="344" x2="980" y2="344"/>
+    <line x1="300" y1="376" x2="980" y2="376"/>
+    <line x1="300" y1="408" x2="980" y2="408"/>
+    <line x1="300" y1="440" x2="980" y2="440"/>
+    <line x1="300" y1="472" x2="980" y2="472"/>
+    <line x1="300" y1="504" x2="980" y2="504"/>
+    <line x1="300" y1="536" x2="980" y2="536"/>
+  </g>
+  <!-- title in handwriting style (system fallback; Caveat may not load in pure SVG renderers) -->
+  <text x="320" y="250" font-family="Georgia, 'Times New Roman', serif" font-size="96" font-style="italic" fill="#1a1a1a">notebook</text>
+  <text x="320" y="320" font-family="Georgia, 'Times New Roman', serif" font-size="28" fill="#5a5a5a">write on ruled lines · tear off a page</text>
+</svg>
