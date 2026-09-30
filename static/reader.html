@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fdfbf5">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+  <title>notebook</title>
+  <!-- Meta is injected by Go ServeReader for real /p/:slug routes.
+       This file is a fallback shell if served statically. -->
+</head>
+<body>
+  <div class="desk">
+    <article id="page" class="paper ink-fade"></article>
+    <footer class="page-footer" id="footer"></footer>
+  </div>
+  <script src="/static/render.js"></script>
+  <script>
+    // Fallback only — real reader is rendered by Go at /p/:slug
+    document.getElementById('page').innerHTML =
+      '<p class="empty">open a page via its link</p>';
+  </script>
+</body>
+</html>
