@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fdfbf5">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+  <title>write — notebook</title>
+  <meta name="description" content="Write a page on ruled paper. Tear it off and share the link.">
+  <meta name="robots" content="noindex">
+</head>
+<body>
+  <div class="desk">
+    <div class="editor-wrap">
+      <div class="toolbar" role="toolbar" aria-label="formatting">
+        <button type="button" id="btn-bold" title="bold (Ctrl/⌘ B)"><b>B</b></button>
+        <button type="button" id="btn-italic" title="italic (Ctrl/⌘ I)"><i>I</i></button>
+        <button type="button" id="btn-underline" title="underline (Ctrl/⌘ U)"><u>U</u></button>
+        <button type="button" id="btn-strike" title="strike"><s>S</s></button>
+        <span class="sep"></span>
+        <button type="button" id="btn-sub" title="subscript">x₂</button>
+        <button type="button" id="btn-sup" title="superscript">x²</button>
+        <button type="button" id="btn-code" title="code (Ctrl/⌘ E)">&lt;/&gt;</button>
+        <span class="sep"></span>
+        <button type="button" id="btn-h3" title="heading">H3</button>
+        <button type="button" id="btn-h4" title="subheading">H4</button>
+        <button type="button" id="btn-quote" title="quote">“”</button>
+        <button type="button" id="btn-aside" title="aside">∥</button>
+        <button type="button" id="btn-codeblock" title="code block">{ }</button>
+        <button type="button" id="btn-hr" title="line">—</button>
+        <span class="sep"></span>
+        <button type="button" id="btn-link" title="link (Ctrl/⌘ K)">link</button>
+        <button type="button" id="btn-image" title="image">img</button>
+        <button type="button" id="btn-details" title="details">▾</button>
+      </div>
+
+      <div class="paper">
+        <input
+          id="title"
+          type="text"
+          placeholder="title (optional)"
+          autocomplete="off"
+          spellcheck="true"
+          style="
+            display:block;width:100%;border:none;background:transparent;
+            font-family:'Caveat',cursive;font-size:28px;font-weight:600;
+            line-height:64px;color:#1a1a1a;padding:0;margin:0;outline:none;
+          "
+        >
+        <div id="editor"></div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn-tear" id="btn-publish">Tear off this page</button>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/static/app.js"></script>
+</body>
+</html>
