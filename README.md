@@ -1,72 +1,67 @@
-<p align="center">
-  <img src="static/favicon.svg" width="48" height="48" alt="notebook">
-</p>
-
 # notebook
 
-Write on ruled paper. Tear the page off. Share the link.
+A telegra.ph-style publishing app that looks like a paper notebook — ruled paper,
+red margin line, handwritten titles (Caveat), ink that "dries" as you publish.
+No accounts: pick up a page, write, tear it off, share the link.
 
-No accounts. No dashboard. No blue “publish” button that looks like every other site. Just cream paper, a red margin, and handwriting.
+## Stack
 
-<p align="center">
-  <img src="static/og.svg" width="640" alt="notebook — write on ruled lines">
-</p>
+- Vite + TypeScript + React 19 (package manager: bun)
+- TipTap v3 editor (`@tiptap/*` 3.x) with custom Aside/Details/Summary nodes
+- Convex for backend & storage (pages table + `uploadImage` HTTP action)
+- Plain CSS theme in `src/notebook.css` layered over the Tailwind foundation in
+  `src/index.css` (do not remove the Tailwind directives)
 
-Inspired by [telegra.ph](https://telegra.ph): open a blank page, write something, get a URL. We kept that spirit and put it on paper — the kind you’d actually want to write in.
+## Routes
 
-## what it feels like
+| Route     | Page                              |
+| --------- | --------------------------------- |
+| `/`       | Table of contents (newest first)  |
+| `/new`    | Editor (TipTap + toolbar)         |
+| `/p/:slug`| Reader (sanitized node rendering) |
+| `/about`  | About the notebook                |
+| `*`       | 404 — "torn out" page             |
 
-- Ruled lines that *stay* under your words (line-height locked to 32px)
-- Caveat handwriting, ink-black text, warm desk background
-- “Tear off this page” instead of Publish
-- Errors that sound like a notebook: *this page seems to have been torn out*
-- Link prompts and mistakes open a small paper slip — not a browser dialog
+`/p/:slug?edit=1` shows a "tear out" link that opens a delete confirmation.
 
-## write
+## Page format
 
-1. Go to `/new`
-2. Type. Use the stamped toolbar, or the keys you already know:
-   - **Ctrl/⌘ Z** undo · **Ctrl/⌘ Y** or **⇧ Z** redo  
-   - **Ctrl/⌘ B** bold · **I** italic · **U** underline · **E** code · **K** link
-3. Hit **Tear off this page**
-4. Share `/p/<slug>` — that’s the only URL that matters
+Pages are stored as Telegraph-style JSON node trees:
 
-Anyone with the link can read it. Nobody needs to sign up.
+```json
+[
+  { "tag": "p", "children": ["hello ", { "tag": "strong", "children": ["world"] }] },
+  { "tag": "img", "attrs": { "src": "https://...convex.site/..." } }
+]
+```
 
-## run it
+Allowed tags are whitelisted in two places that must stay in sync:
 
-Telegram is the database (via [gramobase](https://www.npmjs.com/package/gramobase)). You need a bot + a channel once.
+- `src/lib/nodes.ts` — client whitelist, sanitizer, and TipTap→tree converter
+- `src/convex/pages.ts` — server-side sanitizer applied at publish time
+
+Rendering uses `document.createElement` / `createTextNode` only (never
+`innerHTML`), and URLs are restricted to `http(s)` or same-origin paths.
+
+## Design tokens (locked)
+
+- `--line: 32px` — the ruled-line grid; spacing snaps to multiples of 32
+- `--paper: #fdfbf5`, `--ink: #1a1a1a`, red margin line at 40px (28px mobile)
+- Neobrutalist chrome: square corners, 2px black borders, `--chrome-shadow`
+  offset shadows, "stamped" buttons that invert on hover
+
+## Backend
+
+- `src/convex/pages.ts` — create (8-char slug with collision retry), getBySlug,
+  list, remove; server sanitizes content before insert
+- `src/convex/http.ts` — auth routes + `POST /uploadImage` (multipart, 8MB cap,
+  stored via `ctx.storage.store`). Note: `httpAction` must be imported from
+  `./_generated/server`.
+
+## Development
 
 ```bash
-# sidecar — talks to Telegram
-cd sidecar
-npm install
-npx gramobase init   # writes sidecar/.env
-npm start            # :4000
-
-# backend — serves the paper
-cd ../go-backend
-go run .             # :8080
+bun install
+bunx convex dev --once   # regenerate Convex types / push functions
+bun tsc -b --noEmit      # typecheck
 ```
-
-Open [http://localhost:8080](http://localhost:8080).
-
-Or: `docker compose up --build` (still needs `sidecar/.env` from init).
-
-## how it’s built
-
-```
-you → Go (:8080) → Node sidecar (:4000) → gramobase → Telegram
-```
-
-Pages are a Telegraph-style node tree (`{ tag, attrs, children }`), not Markdown blobs. The editor is TipTap in plain JS. CSS is hand-written — no Tailwind, no framework chrome.
-
-```
-go-backend/   routes, validation, paper 404/500
-sidecar/      thin HTTP wrapper around gramobase
-static/       the paper (HTML, CSS, editor, favicon, og)
-```
-
-## license
-
-MIT — tear it apart, rewrite the margins, keep the paper.
