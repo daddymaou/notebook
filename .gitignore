@@ -1,24 +1,5 @@
-# env
+node_modules
+dist
 .env
-sidecar/.env
-*.env.local
-
-# deps
-sidecar/node_modules/
-sidecar/dist/
-
-# go
-go-backend/notebook
-*.exe
-
-# os
-.DS_Store
-Thumbs.db
-
-# ide
-.idea/
-.vscode/
-*.swp
-
-# uploads temp
-/tmp/notebook-uploads/
+.env.local
+.convex
