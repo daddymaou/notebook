@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- paper sheet -->
+  <rect x="4" y="2" width="24" height="28" fill="#fdfbf5" stroke="#1a1a1a" stroke-width="1.5"/>
+  <!-- ruled lines -->
+  <line x1="8" y1="10" x2="24" y2="10" stroke="#d5dbe3" stroke-width="1.5"/>
+  <line x1="8" y1="16" x2="24" y2="16" stroke="#d5dbe3" stroke-width="1.5"/>
+  <line x1="8" y1="22" x2="24" y2="22" stroke="#d5dbe3" stroke-width="1.5"/>
+  <!-- red margin stripe -->
+  <line x1="11" y1="4" x2="11" y2="28" stroke="#e8a5a5" stroke-width="1.5"/>
+</svg>
