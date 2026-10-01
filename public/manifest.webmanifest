@@ -1,0 +1,23 @@
+{
+  "name": "notebook",
+  "short_name": "notebook",
+  "description": "a paper-feeling blog",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fdfbf5",
+  "theme_color": "#fdfbf5",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
