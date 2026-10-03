@@ -54,9 +54,9 @@ Rendering uses `document.createElement` / `createTextNode` only (never
 
 - `src/convex/pages.ts` — create (8-char slug with collision retry), getBySlug,
   list, remove; server sanitizes content before insert
-- `src/convex/http.ts` — auth routes + `POST /uploadImage` (multipart, 8MB cap,
-  stored via `ctx.storage.store`). Note: `httpAction` must be imported from
-  `./_generated/server`.
+- `src/convex/http.ts` — `POST /uploadImage` (multipart, 8MB cap, stored via
+  `ctx.storage.store`). Note: `httpAction` must be imported from
+  `./_generated/server`. No auth routes — the app has no accounts.
 
 ## Development
 

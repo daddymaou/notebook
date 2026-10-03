@@ -1,5 +1,4 @@
-import { ConvexReactClient } from "convex/react";
-import { ConvexAuthProvider } from "@convex-dev/auth/react";
+import { ConvexProvider, ConvexReactClient } from "convex/react";
 import React, { StrictMode, lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
@@ -77,7 +76,7 @@ const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RootErrorBoundary>
-      <ConvexAuthProvider client={convex}>
+      <ConvexProvider client={convex}>
         <BrowserRouter>
           <Suspense fallback={<RouteLoading />}>
             <Routes>
@@ -90,7 +89,7 @@ createRoot(document.getElementById("root")!).render(
           </Suspense>
         </BrowserRouter>
         <ToastHost />
-      </ConvexAuthProvider>
+      </ConvexProvider>
     </RootErrorBoundary>
   </StrictMode>,
 );

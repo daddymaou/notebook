@@ -1,6 +1,5 @@
 import { httpRouter } from "convex/server";
 import { httpAction } from "./_generated/server";
-import { auth } from "./auth";
 
 const MAX_BYTES = 8 * 1024 * 1024; // 8 MB cap for images
 
@@ -12,9 +11,6 @@ const cors: Record<string, string> = {
 };
 
 const http = httpRouter();
-
-// Convex Auth routes (kept so nothing else in the scaffold breaks).
-auth.addHttpRoutes(http);
 
 // OPTIONS preflight for the upload endpoint.
 http.route({
