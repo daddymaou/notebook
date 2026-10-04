@@ -2,11 +2,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
-import Underline from "@tiptap/extension-underline";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
 import Highlight from "@tiptap/extension-highlight";
-import Link from "@tiptap/extension-link";
 import { Placeholder } from "@tiptap/extensions";
 import { Aside, Details, Summary } from "@/lib/tiptap-nodes";
 import { useNavigate } from "react-router";
@@ -15,16 +13,10 @@ import { api } from "@/convex/_generated/api";
 import { Desk, Paper } from "@/components/Paper";
 import { Modal } from "@/components/Modal";
 import { tiptapToJson } from "@/lib/nodes";
+import { uploadEndpoint } from "@/lib/convex";
 import { showToast } from "@/lib/toast";
 
 const DRAFT_KEY = "notebook_draft";
-
-/** Convex deployments expose http actions on the .convex.site domain. */
-function uploadEndpoint(): string {
-  const cloud = import.meta.env.VITE_CONVEX_URL as string | undefined;
-  if (!cloud) return "/uploadImage";
-  return `${cloud.replace(".convex.cloud", ".convex.site")}/uploadImage`;
-}
 
 type Draft = { title: string; json: unknown };
 
@@ -170,16 +162,13 @@ export default function Editor() {
         bulletList: false,
         orderedList: false,
         listItem: false,
+        // StarterKit v3 already bundles these two; registering them again
+        // produced "Duplicate extension names found: ['link', 'underline']"
+        link: { openOnClick: false, defaultProtocol: "https", autolink: false },
       }),
-      Underline,
       Subscript,
       Superscript,
       Highlight.configure({ multicolor: false }),
-      Link.configure({
-        openOnClick: false,
-        defaultProtocol: "https",
-        autolink: false,
-      }),
       Image.configure({ inline: false }),
       Aside,
       Details,

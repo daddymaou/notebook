@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import "./index.css";
 import "./notebook.css";
 import { ToastHost } from "@/components/ToastHost";
+import { convexUrl } from "@/lib/convex";
 import { printBootBanner } from "@/lib/toast";
 
 printBootBanner();
@@ -71,7 +72,7 @@ class RootErrorBoundary extends React.Component<
   }
 }
 
-const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
+const convex = new ConvexReactClient(convexUrl());
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
